@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  frontend:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Type check
+        run: pnpm type-check --filter=@audit-demo/web --filter=@audit-demo/contracts
+
+      - name: Lint
+        run: pnpm lint --filter=@audit-demo/web --filter=@audit-demo/contracts
+
+      - name: Test
+        run: pnpm test --filter=@audit-demo/web
+
+      - name: Build
+        run: pnpm build --filter=@audit-demo/web
+
+  backend:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: audit_demo_test
+          POSTGRES_USER: audit_user
+          POSTGRES_PASSWORD: audit_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_pgsql, mbstring
+          coverage: none
+
+      - name: Copy .env
+        run: |
+          cd apps/api
+          cp .env.example .env
+          sed -i 's/DB_DATABASE=audit_demo/DB_DATABASE=audit_demo_test/g' .env
+
+      - name: Install dependencies
+        run: |
+          cd apps/api
+          composer install --prefer-dist --no-interaction
+
+      - name: Generate key
+        run: |
+          cd apps/api
+          php artisan key:generate
+
+      - name: Run migrations
+        run: |
+          cd apps/api
+          php artisan migrate --force
+
+      - name: Run tests
+        run: |
+          cd apps/api
+          php artisan test
+
+      - name: Run Pint (code style)
+        run: |
+          cd apps/api
+          ./vendor/bin/pint --test

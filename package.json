@@ -1,0 +1,31 @@
+{
+  "name": "audit-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Physical condition audit management system",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "api:migrate": "cd apps/api && php artisan migrate",
+    "api:seed": "cd apps/api && php artisan db:seed",
+    "api:fresh": "cd apps/api && php artisan migrate:fresh --seed",
+    "api:serve": "cd apps/api && php artisan serve",
+    "api:test": "cd apps/api && php artisan test",
+    "setup": "pnpm install && pnpm docker:up && sleep 3 && pnpm api:fresh"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
