@@ -9,15 +9,8 @@ export default function HomePage() {
         Welcome to Audit Demo
       </Typography>
       <Paper sx={{ p: 3, mt: 3 }}>
-        <Typography variant="h5" gutterBottom>
-          Getting Started
-        </Typography>
-        <Typography variant="body1" paragraph>
-          This is a modern full-stack application for managing physical condition
-          audits at various locations.
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Built with React, TypeScript, MaterialUI, and Laravel
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold', color: 'red' }}>
+          DON'T PANIC
         </Typography>
       </Paper>
     </Box>

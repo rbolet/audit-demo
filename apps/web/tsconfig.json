@@ -1,31 +1,46 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
 
-    /* Linting */
+    /* Type checking */
     "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
 
-    /* Path mapping */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    /* Emit */
+    "declaration": false,
+    "removeComments": true,
+
+    /* Interop constraints */
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+
+    /* Path mapping - using Vite's built-in alias resolution */
   },
-  "include": ["src"],
+  "include": ["src/**/*", "src/**/*.tsx", "**/*.stories.ts", "**/*.stories.tsx", ".storybook/**/*"],
+  "exclude": ["node_modules", "dist", "coverage", "storybook-static"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

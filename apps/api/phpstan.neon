@@ -3,22 +3,41 @@ includes:
 
 parameters:
     paths:
-        - app
-        - database
-        - routes
+        - app/
+        - database/factories/
+        - database/seeders/
+        - routes/
+        - config/
 
-    # Level 0 is the loosest, 9 is the strictest
-    # Start with 5 for a good balance
-    level: 5
+    # Level 6 for stricter analysis - good for production apps
+    level: 6
+
+    # Modern PHPStan configuration (valid options only)
+    checkExplicitMixed: true
+    checkFunctionNameCase: true
+    checkInternalClassCaseSensitivity: true
+    checkMissingVarTagTypehint: true
+    checkTooWideReturnTypesInProtectedAndPublicMethods: true
+    checkUninitializedProperties: true
+    checkDynamicProperties: true
+    reportMagicMethods: true
+    reportMagicProperties: true
+    reportStaticMethodSignatures: true
+    reportWrongPhpDocTypeInVarTag: true
 
     ignoreErrors:
-        # Ignore common Laravel patterns that PHPStan doesn't understand
-        - '#Unsafe usage of new static#'
+        # Laravel-specific patterns that are safe to ignore
+        - '#Unsafe usage of new static\(\)#'
+        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Builder#'
+        - '#Method .+ should return .+ but returns Illuminate\\Database\\Eloquent\\Builder#'
 
     excludePaths:
-        - bootstrap/cache
-        - storage
-        - vendor
+        - bootstrap/cache/
+        - storage/
+        - vendor/
+        - database/migrations/
+        - tests/
 
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
+    # Type aliases for better type checking
+    typeAliases:
+        UserId: 'int<1, max>'

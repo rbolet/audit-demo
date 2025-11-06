@@ -20,12 +20,7 @@ export default function NotFoundPage() {
       <Typography variant="h5" gutterBottom>
         Page Not Found
       </Typography>
-      <Button
-        component={RouterLink}
-        to="/"
-        variant="contained"
-        sx={{ mt: 3 }}
-      >
+      <Button component={RouterLink} to="/" variant="contained" sx={{ mt: 3 }}>
         Go Home
       </Button>
     </Box>

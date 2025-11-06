@@ -7,5 +7,3 @@ A modern full-stack application for managing physical condition audits at variou
 - **Frontend**: React, TypeScript, Vite, MaterialUI
 - **Backend**: Laravel, PHP, PostgreSQL
 - **Monorepo**: Turborepo with PNPM workspaces
-
-TEST

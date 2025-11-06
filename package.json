@@ -23,24 +23,34 @@
     "api:test": "cd apps/api && php artisan test",
     "api:format": "cd apps/api && ./vendor/bin/pint",
     "api:format:check": "cd apps/api && ./vendor/bin/pint --test",
-    "api:analyze": "cd apps/api && ./vendor/bin/phpstan analyse",
+    "api:analyze": "cd apps/api && ./vendor/bin/phpstan analyse --memory-limit=1G",
     "setup": "pnpm install && pnpm docker:up && sleep 3 && pnpm api:fresh",
     "prepare": "husky"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.18.1",
-    "@typescript-eslint/parser": "^8.18.1",
-    "eslint": "^9.17.0",
+    "@eslint/js": "^9.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "eslint": "^9.39.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^16.5.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.11",
-    "prettier": "^3.4.2",
-    "turbo": "^2.3.3"
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "turbo": "^2.6.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
+      "eslint --fix --config eslint.config.js",
+      "prettier --write"
+    ],
+    "apps/web/**/*.{js,jsx,ts,tsx}": [
+      "cd apps/web && eslint --fix --config eslint.config.js",
+      "prettier --write"
+    ],
+    "packages/contracts/**/*.{js,ts}": [
+      "cd packages/contracts && eslint --fix --config eslint.config.js",
       "prettier --write"
     ],
     "*.{json,css,scss,md}": [
