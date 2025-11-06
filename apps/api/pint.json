@@ -1,0 +1,24 @@
+{
+  "preset": "laravel",
+  "rules": {
+    "simplified_null_return": true,
+    "braces": false,
+    "new_with_braces": {
+      "anonymous_class": true,
+      "named_class": true
+    },
+    "binary_operator_spaces": {
+      "default": "single_space"
+    },
+    "blank_line_after_opening_tag": true,
+    "blank_lines_before_namespace": true,
+    "class_definition": {
+      "multi_line_extends_each_single_line": true,
+      "single_item_single_line": true,
+      "single_line": true
+    },
+    "ordered_imports": {
+      "sort_algorithm": "alpha"
+    }
+  }
+}

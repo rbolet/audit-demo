@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+vendor
+
+# Build outputs
+dist
+build
+.next
+.turbo
+
+# Laravel
+apps/api/bootstrap/cache
+apps/api/storage
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+
+# Other
+coverage
+.DS_Store
+planning-docs

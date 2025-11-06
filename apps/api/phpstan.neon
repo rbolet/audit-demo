@@ -1,0 +1,24 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+        - database
+        - routes
+
+    # Level 0 is the loosest, 9 is the strictest
+    # Start with 5 for a good balance
+    level: 5
+
+    ignoreErrors:
+        # Ignore common Laravel patterns that PHPStan doesn't understand
+        - '#Unsafe usage of new static#'
+
+    excludePaths:
+        - bootstrap/cache
+        - storage
+        - vendor
+
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
