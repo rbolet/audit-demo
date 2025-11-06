@@ -34,11 +34,10 @@ export default [
         },
       ],
       '@typescript-eslint/no-explicit-any': 'error',
-      'prefer-const': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/consistent-type-exports': 'error',
-      'prefer-const': 'error',
       'no-var': 'error',
+      'prefer-const': 'error',
     },
   },
 

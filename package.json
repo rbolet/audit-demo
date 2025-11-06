@@ -2,6 +2,7 @@
   "name": "audit-demo",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Physical condition audit management system",
   "scripts": {
     "dev": "turbo run dev",
@@ -41,19 +42,18 @@
     "turbo": "^2.6.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --config eslint.config.js",
-      "prettier --write"
-    ],
     "apps/web/**/*.{js,jsx,ts,tsx}": [
       "cd apps/web && eslint --fix --config eslint.config.js",
       "prettier --write"
     ],
-    "packages/contracts/**/*.{js,ts}": [
+    "packages/contracts/src/**/*.{js,ts}": [
       "cd packages/contracts && eslint --fix --config eslint.config.js",
       "prettier --write"
     ],
     "*.{json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "**/eslint.config.js": [
       "prettier --write"
     ],
     "apps/api/**/*.php": [
